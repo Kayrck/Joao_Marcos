@@ -8,7 +8,16 @@ import {
   ArrowRight,
   ShieldCheck,
   Zap,
-  Star
+  Target,
+  ClipboardList,
+  CalendarClock,
+  HeartPulse,
+  RefreshCw,
+  X,
+  Check,
+  Flame,
+  Brain,
+  Activity
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -18,8 +27,6 @@ import { Button } from "../components/Button";
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-// --- Components ---
 
 const Header = () => (
   <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-900">
@@ -65,19 +72,9 @@ const Hero = () => (
             </Button>
           </a>
         </div>
-        <div className="mt-8 flex items-center gap-4 text-zinc-500 text-sm">
-          <div className="flex -space-x-2">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="w-8 h-8 rounded-full border-2 border-zinc-950 bg-zinc-800 flex items-center justify-center overflow-hidden">
-                <ImageWithFallback 
-                  src={`https://i.pravatar.cc/100?u=${i}`} 
-                  alt="Avatar" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-          <p>+200 alunos transformados em 2025</p>
+        <div className="mt-8 flex items-center gap-2 text-lime-400 text-sm font-bold">
+          <Clock size={16} />
+          <p>Vagas limitadas</p>
         </div>
       </motion.div>
       <motion.div 
@@ -94,7 +91,6 @@ const Hero = () => (
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 to-transparent" />
         </div>
-        {/* Floating cards for "conversion triggers" */}
         <div className="absolute -bottom-6 -right-6 bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-xl hidden sm:block">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-lime-400 rounded-full flex items-center justify-center">
@@ -184,7 +180,7 @@ const Plans = () => {
       price: "450",
       period: "/mês",
       desc: "Atenção total. Treinos 100% acompanhados para máxima performance.",
-      features: ["Até 5x por semana", "Correção técnica em tempo real", "Monitoramento de carga", "Suporte nutricional base"],
+      features: ["Até 5x por semana", "Correção técnica em tempo real", "Monitoramento de carga", "Correção postural e biomecânica"],
       cta: "Consultar Horários",
       popular: false
     }
@@ -202,7 +198,7 @@ const Plans = () => {
             <div 
               key={idx} 
               className={cn(
-                "relative p-8 rounded-3xl flex flex-col border",
+                "relative p-8 rounded-3xl flex flex-col border transition-all duration-300 hover:bg-zinc-900 hover:border-lime-400 hover:shadow-[0_0_30px_rgba(163,230,53,0.1)]",
                 plan.popular ? "bg-zinc-900 border-lime-400 shadow-[0_0_30px_rgba(163,230,53,0.1)]" : "bg-zinc-950 border-zinc-800"
               )}
             >
@@ -226,7 +222,7 @@ const Plans = () => {
                   </li>
                 ))}
               </ul>
-              <a href={`https://wa.me/550000000000?text=Olá João! Tenho interesse no plano ${plan.name}`}>
+              <a href={`https://wa.me/558592718614?text=Olá João! Tenho interesse no plano ${plan.name}`} target="_blank" rel="noopener noreferrer">
                 <Button variant={plan.popular ? "primary" : "outline"} className="w-full">
                   {plan.cta}
                 </Button>
@@ -246,7 +242,6 @@ const Steps = () => (
         <h2 className="text-3xl font-black uppercase italic italic">Como funciona?</h2>
       </div>
       <div className="grid md:grid-cols-3 gap-12 relative">
-        {/* Connection line (hidden on mobile) */}
         <div className="absolute top-1/2 left-0 right-0 h-px bg-zinc-800 -translate-y-1/2 hidden md:block z-0" />
         
         {[
@@ -267,42 +262,145 @@ const Steps = () => (
   </section>
 );
 
-const SocialProof = () => {
-  const testimonials = [
-    { name: "Carlos Souza", role: "Aluno há 6 meses", text: "Perdi 12kg e minha postura melhorou absurdamente. O João é muito criterioso.", img: "https://images.unsplash.com/photo-1734191321941-08c5ff82c3ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXQlMjBtYW4lMjB0cmFpbmluZyUyMGd5bSUyMHdvcmtvdXR8ZW58MXx8fHwxNzc3OTAzODEzfDA&ixlib=rb-4.1.0&q=80&w=400" },
-    { name: "Mariana Alves", role: "Aluna Online", text: "Mesmo de longe, sinto que ele está do meu lado. O app é incrível e os vídeos ajudam muito.", img: "https://images.unsplash.com/photo-1627483262112-039e9a0a0f16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGZpdCUyMHdvbWFuJTIwZ3ltJTIwd29ya291dCUyMHByb2ZpbGV8ZW58MXx8fHwxNzc3OTAzODEzfDA&ixlib=rb-4.1.0&q=80&w=400" },
-    { name: "Ricardo Dias", role: "Aluno Presencial", text: "Foco total em performance. Bati meus recordes pessoais de força em apenas 3 meses.", img: "https://images.unsplash.com/photo-1736264334806-b50e5ec94be1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXRuZXNzJTIwcmVzdWx0cyUyMGF0aGxldGUlMjB0cmFuc2Zvcm1hdGlvbnxlbnwxfHx8fDE3Nzc5MDM4MTN8MA&ixlib=rb-4.1.0&q=80&w=400" },
+const AuthorityMetrics = () => {
+  const pillars = [
+    { 
+      title: "Biomecânica Aplicada", 
+      desc: "Análise milimétrica da sua execução para garantir que o músculo alvo seja atingido com segurança total.",
+      icon: <Target className="text-lime-400" size={32} />
+    },
+    { 
+      title: "Carga Progressiva", 
+      desc: "Metodologia baseada em dados: cada treino é um degrau planejado para superar seu limite anterior.",
+      icon: <TrendingUp className="text-lime-400" size={32} />
+    },
+    { 
+      title: "Neurociência do Hábito", 
+      desc: "Estratégias mentais para manter a constância mesmo naqueles dias em que a motivação desaparece.",
+      icon: <Zap className="text-lime-400" size={32} />
+    }
   ];
 
   return (
-    <section className="py-24 bg-zinc-950 overflow-hidden">
+    <section className="py-24 bg-zinc-950 overflow-hidden border-t border-zinc-900">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="max-w-lg">
-            <h2 className="text-3xl font-black uppercase italic mb-4">Quem treina, <span className="text-lime-400">confia.</span></h2>
-            <p className="text-zinc-400 italic">Resultados reais de pessoas comuns que decidiram sair da zona de conforto.</p>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl lg:text-5xl font-black mb-4 uppercase italic">A Ciência do <span className="text-lime-400">Resultado.</span></h2>
+          <p className="text-zinc-400 max-w-2xl mx-auto">Não é sorte, é método. Cada treino é desenhado sobre três pilares que transformam esforço em resultado mensurável.</p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          {pillars.map((p, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-3xl bg-zinc-900/50 border border-zinc-800 hover:border-lime-400/30 transition-all group"
+            >
+              <div className="mb-6">{p.icon}</div>
+              <h3 className="text-xl font-bold mb-3">{p.title}</h3>
+              <p className="text-zinc-400 text-sm leading-relaxed">{p.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="pt-16 border-t border-zinc-900">
+          <div className="text-center mb-10">
+            <span className="inline-block px-3 py-1 bg-lime-400/10 text-lime-400 rounded-full text-xs font-bold uppercase tracking-widest mb-3">
+              Compromisso assinado
+            </span>
+            <h3 className="text-2xl lg:text-4xl font-black uppercase italic">
+              O que você <span className="text-lime-400">recebe na semana 1.</span>
+            </h3>
           </div>
-          <div className="flex items-center gap-2 text-lime-400 font-bold">
-            <Star size={16} fill="currentColor" />
-            <Star size={16} fill="currentColor" />
-            <Star size={16} fill="currentColor" />
-            <Star size={16} fill="currentColor" />
-            <Star size={16} fill="currentColor" />
-            <span className="text-zinc-500 text-sm ml-2">4.9/5 estrelas</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { icon: <ClipboardList size={22} />, title: "Avaliação 360°", desc: "Anamnese completa: histórico, lesões, rotina e metas mapeadas em até 24h." },
+              { icon: <CalendarClock size={22} />, title: "Plano em 48h", desc: "Protocolo de treino e estratégia nutricional entregues em até dois dias úteis." },
+              { icon: <HeartPulse size={22} />, title: "Suporte direto", desc: "Acesso ao meu WhatsApp pessoal para dúvidas técnicas durante toda a jornada." },
+              { icon: <RefreshCw size={22} />, title: "Ajuste a cada 30 dias", desc: "Reavaliação mensal obrigatória. Se algo não evoluir, o plano muda na hora." }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08 }}
+                viewport={{ once: true }}
+                className="relative p-6 rounded-2xl bg-gradient-to-br from-zinc-900/80 to-zinc-950 border border-zinc-800 hover:border-lime-400/40 transition-all group overflow-hidden"
+              >
+                <div className="absolute -top-6 -right-6 w-20 h-20 bg-lime-400/5 rounded-full blur-2xl group-hover:bg-lime-400/10 transition-colors" />
+                <div className="relative">
+                  <div className="w-10 h-10 rounded-lg bg-lime-400/10 text-lime-400 flex items-center justify-center mb-4">
+                    {item.icon}
+                  </div>
+                  <p className="text-[10px] uppercase font-bold tracking-widest text-lime-400/70 mb-1">0{i + 1}</p>
+                  <h4 className="font-bold mb-2">{item.title}</h4>
+                  <p className="text-zinc-400 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <div key={i} className="p-6 rounded-3xl bg-zinc-900 border border-zinc-800 flex flex-col">
-              <div className="w-12 h-12 rounded-full overflow-hidden mb-4 border border-zinc-700">
-                <ImageWithFallback src={t.img} alt={t.name} className="w-full h-full object-cover" />
+      </div>
+    </section>
+  );
+};
+
+const MythsVsTruths = () => {
+  const rows = [
+    { myth: "Treinar 2h por dia acelera o resultado.", truth: "60 min bem estruturados rendem mais que 2h sem direção." },
+    { myth: "Sem dieta restritiva, não há evolução.", truth: "Estratégia nutricional sustentável vence qualquer dieta-relâmpago." },
+    { myth: "Mais peso na barra = mais músculo.", truth: "Execução correta com carga adequada é o que recruta fibra muscular." },
+    { myth: "Suplemento é o atalho do resultado.", truth: "Sono, treino e constância respondem por 90% da sua evolução." },
+  ];
+
+  return (
+    <section className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(163,230,53,0.06),transparent_50%)] pointer-events-none" />
+      <div className="max-w-5xl mx-auto px-4 relative z-10">
+        <div className="text-center mb-14">
+          <span className="inline-block px-3 py-1 bg-lime-400/10 text-lime-400 rounded-full text-xs font-bold uppercase tracking-widest mb-3">
+            Verdade que ninguém te conta
+          </span>
+          <h2 className="text-3xl lg:text-5xl font-black uppercase italic">
+            Mitos <span className="text-zinc-600">x</span> <span className="text-lime-400">Verdades.</span>
+          </h2>
+          <p className="text-zinc-400 max-w-2xl mx-auto mt-4">
+            A indústria fitness lucra com a sua confusão. O método existe para te tirar dela.
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          {rows.map((row, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.08 }}
+              viewport={{ once: true }}
+              className="grid md:grid-cols-2 gap-px bg-zinc-800 rounded-2xl overflow-hidden border border-zinc-800"
+            >
+              <div className="p-6 bg-zinc-950 flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center shrink-0">
+                  <X size={16} className="text-red-500" />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-bold tracking-widest text-red-500/80 mb-1">Mito</p>
+                  <p className="text-zinc-400 line-through decoration-red-500/40">{row.myth}</p>
+                </div>
               </div>
-              <p className="text-zinc-300 italic mb-6 flex-1">"{t.text}"</p>
-              <div>
-                <p className="font-bold">{t.name}</p>
-                <p className="text-xs text-zinc-500">{t.role}</p>
+              <div className="p-6 bg-zinc-900/40 flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-full bg-lime-400/10 flex items-center justify-center shrink-0">
+                  <Check size={16} className="text-lime-400" />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-bold tracking-widest text-lime-400 mb-1">Verdade</p>
+                  <p className="text-white">{row.truth}</p>
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -310,9 +408,39 @@ const SocialProof = () => {
   );
 };
 
+const PhilosophyStrip = () => {
+  const words = [
+    { icon: <Flame size={18} />, text: "Disciplina" },
+    { icon: <Brain size={18} />, text: "Estratégia" },
+    { icon: <Activity size={18} />, text: "Consistência" },
+    { icon: <Target size={18} />, text: "Resultado" },
+    { icon: <Flame size={18} />, text: "Disciplina" },
+    { icon: <Brain size={18} />, text: "Estratégia" },
+    { icon: <Activity size={18} />, text: "Consistência" },
+    { icon: <Target size={18} />, text: "Resultado" },
+  ];
+  return (
+    <section className="py-6 bg-lime-400 text-black overflow-hidden border-y border-lime-300">
+      <motion.div
+        className="flex gap-12 whitespace-nowrap"
+        animate={{ x: ["0%", "-50%"] }}
+        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+      >
+        {[...words, ...words].map((w, i) => (
+          <div key={i} className="flex items-center gap-3 shrink-0">
+            {w.icon}
+            <span className="font-black uppercase italic tracking-tight text-xl">{w.text}</span>
+            <span className="text-black/40">/</span>
+          </div>
+        ))}
+      </motion.div>
+    </section>
+  );
+};
+
+
 const CTAFinal = () => (
   <section id="contato" className="py-24 relative overflow-hidden">
-    {/* Decorative blur */}
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-lime-400/10 blur-[120px] rounded-full pointer-events-none" />
     
     <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
@@ -323,7 +451,7 @@ const CTAFinal = () => (
       <p className="text-zinc-400 text-lg mb-10 max-w-xl mx-auto">
         As vagas são limitadas para garantir a qualidade do acompanhamento. Não deixe para amanhã o treino que pode mudar sua vida hoje.
       </p>
-      <a href="https://wa.me/550000000000?text=Olá João! Quero agendar meu treino." className="inline-block w-full sm:w-auto">
+      <a href="https://wa.me/558592718614?text=Olá João! Quero agendar meu treino." target="_blank" rel="noopener noreferrer" className="inline-block w-full sm:w-auto">
         <Button size="lg" className="px-12 flex items-center gap-2 group">
           <MessageCircle size={20} />
           <span>Falar com João no WhatsApp</span>
@@ -360,13 +488,9 @@ const Footer = () => (
         </a>
       </div>
       <div className="flex gap-4">
-        {/* Social Icons Placeholder */}
-        <div className="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-500 hover:text-lime-400 transition-colors cursor-pointer">
+        <a href="https://www.instagram.com/prof_jmbatista/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-500 hover:text-lime-400 transition-colors cursor-pointer">
           <span className="font-bold text-[10px]">IG</span>
-        </div>
-        <div className="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-500 hover:text-lime-400 transition-colors cursor-pointer">
-          <span className="font-bold text-[10px]">YT</span>
-        </div>
+        </a>
       </div>
     </div>
   </footer>
@@ -380,13 +504,15 @@ export function Home() {
       <Benefits />
       <Steps />
       <Plans />
-      <SocialProof />
+      <AuthorityMetrics />
+      <PhilosophyStrip />
+      <MythsVsTruths />
       <CTAFinal />
       <Footer />
       
-      {/* Floating WA Button (Mobile only or persistent) */}
       <a 
-        href="https://wa.me/550000000000" 
+        href="https://wa.me/558592718614?text=Olá João Marcos, vi sua página e gostaria de receber mais informações sobre os planos disponíveis." 
+        target="_blank" rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform active:scale-95 sm:hidden"
       >
         <MessageCircle size={24} fill="currentColor" />
