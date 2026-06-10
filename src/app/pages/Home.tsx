@@ -24,6 +24,9 @@ import { twMerge } from "tailwind-merge";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { Button } from "../components/Button";
 
+// IMPORTAÇÃO "À PROVA DE BALA" DA IMAGEM:
+import heroImage from "../../imports/WhatsApp_Image_2026-05-04_at_18.09.27.jpeg";
+
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -74,7 +77,7 @@ const Hero = () => (
         </div>
         <div className="mt-8 flex items-center gap-2 text-lime-400 text-sm font-bold">
           <Clock size={16} />
-          <p>Vagas limitadas</p>
+          <p>Vagas limitadas para o bloco deste mês</p>
         </div>
       </motion.div>
       <motion.div 
@@ -85,7 +88,7 @@ const Hero = () => (
       >
         <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl">
           <img
-            src="/src/imports/WhatsApp_Image_2026-05-04_at_18.09.27.jpeg"
+            src={heroImage}
             alt="João Marcos Treinando"
             className="w-full h-full object-cover"
           />
