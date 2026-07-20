@@ -321,7 +321,7 @@ const AuthorityMetrics = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { icon: <ClipboardList size={22} />, title: "Avaliação 360°", desc: "Anamnese completa: histórico, lesões, rotina e metas mapeadas em até 24h." },
-              { icon: <CalendarClock size={22} />, title: "Plano em 48h", desc: "Protocolo de treino e estratégia nutricional entregues em até dois dias úteis." },
+              { icon: <CalendarClock size={22} />, title: "Plano em 48h", desc: "Cada exercício, volume e intensidade são definidos de acordo com seu objetivo, nível e rotina." },
               { icon: <HeartPulse size={22} />, title: "Suporte direto", desc: "Acesso ao meu WhatsApp pessoal para dúvidas técnicas durante toda a jornada." },
               { icon: <RefreshCw size={22} />, title: "Ajuste a cada 30 dias", desc: "Reavaliação mensal obrigatória. Se algo não evoluir, o plano muda na hora." }
             ].map((item, i) => (
