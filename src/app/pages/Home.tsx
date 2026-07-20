@@ -23,6 +23,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { Button } from "../components/Button";
+import FlowFieldBackground from "../components/ui/flow-field-background";
 
 // IMPORTAÇÃO "À PROVA DE BALA" DA IMAGEM:
 import heroImage from "../../imports/WhatsApp_Image_2026-05-04_at_18.09.27.jpeg";
@@ -501,7 +502,14 @@ const Footer = () => (
 
 export function Home() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-lime-400 selection:text-black">
+    <div className="relative min-h-screen text-white font-sans selection:bg-lime-400 selection:text-black">
+      <FlowFieldBackground
+        color="#a3e635"
+        trailOpacity={0.1}
+        particleCount={400}
+        speed={0.8}
+        className="fixed inset-0 -z-10 pointer-events-none"
+      />
       <Header />
       <Hero />
       <Benefits />
