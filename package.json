@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "concurrently -k -n web,api -c cyan,magenta \"npm:dev:web\" \"npm:dev:api\"",
     "dev:web": "vite",
-    "dev:api": "tsx watch server/dev.ts",
-    "dev:docker": "concurrently -k -n web,api \"vite --host\" \"tsx watch server/dev.ts\"",
+    "dev:api": "node --watch --import tsx server/dev.ts",
+    "dev:docker": "concurrently -k -n web,api \"vite --host\" \"node --watch --import tsx server/dev.ts\"",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",

@@ -47,7 +47,7 @@ export function PageHeader({ title, description, actions }: { title: string; des
         <h1 className="font-display text-4xl font-extrabold uppercase leading-none tracking-wide">{title}</h1>
         {description && <p className="mt-2 max-w-2xl text-muted-foreground">{description}</p>}
       </div>
-      {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
+      {actions && <div className="flex flex-wrap gap-2 [&>*]:whitespace-nowrap">{actions}</div>}
     </div>
   );
 }
