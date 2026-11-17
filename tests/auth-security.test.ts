@@ -36,6 +36,8 @@ describe("proteção de rotas administrativas", () => {
     }
     const site = await h.api("GET", "/api/public/site", undefined, { auth: false });
     expect(site.status).toBe(200);
+    // o navegador nunca serve conteúdo público antigo (edições do painel aparecem na hora)
+    expect(site.res.headers.get("cache-control")).toContain("must-revalidate");
     const raw = JSON.stringify(site.json);
     expect(raw).not.toMatch(/appointment|receivable|payable|password|client_name/i);
   });

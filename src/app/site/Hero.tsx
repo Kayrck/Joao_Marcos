@@ -19,8 +19,8 @@ export function Hero({ site }: { site: PublicSite }) {
       <div className="container-x relative grid gap-10 pb-14 pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14 lg:pb-24 lg:pt-16">
         <div className="reveal">
           {c.eyebrow && <p className="eyebrow">{c.eyebrow}</p>}
-          <h1 className="h-display mt-4 text-[3.05rem] min-[400px]:text-[3.5rem] sm:text-7xl lg:text-[6.5rem]">
-            {c.titleLine}
+          <h1 className="h-display mt-4 text-[3.05rem] min-[400px]:text-[3.5rem] sm:text-7xl lg:text-[4.4rem] xl:text-[5.2rem]">
+            <Accent text={c.titleLine} />
             {c.titleAccent && (
               <>
                 <br />

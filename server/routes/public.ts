@@ -14,7 +14,7 @@ export const publicRoutes = new Hono<AppEnv>();
 publicRoutes.use("*", withDb);
 
 const cache = (c: { header: (k: string, v: string) => void }) =>
-  c.header("Cache-Control", "public, max-age=0, s-maxage=15, stale-while-revalidate=60");
+  c.header("Cache-Control", "public, max-age=0, must-revalidate, s-maxage=10");
 
 publicRoutes.get("/site", async (c) => {
   cache(c);

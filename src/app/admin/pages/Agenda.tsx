@@ -173,7 +173,7 @@ export default function Agenda() {
           <Button variant="outline" size="sm" onClick={() => setCursor(todayLocal())}>Hoje</Button>
           <Button variant="outline" size="sm" aria-label="Próximo" onClick={() => step(1)}><ChevronRight size={17} aria-hidden /></Button>
         </div>
-        <h2 className="flex-1 font-display text-2xl font-extrabold capitalize">{title}</h2>
+        <h2 className="flex-1 font-display text-2xl font-extrabold">{title.charAt(0).toUpperCase() + title.slice(1)}</h2>
         <Chips label="Visualização" value={view} onChange={setView} options={[{ value: "month", label: "Mês" }, { value: "week", label: "Semana" }, { value: "day", label: "Dia" }]} />
       </div>
       <div className="mb-4 flex flex-wrap gap-3 text-xs">
