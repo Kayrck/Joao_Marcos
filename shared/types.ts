@@ -12,8 +12,8 @@ import type {
   ReceivableStatus,
   ReviewStatus,
   SectionKey,
-} from "./constants";
-import type { SectionContentMap, SiteSettings } from "./site-content";
+} from "./constants.js";
+import type { SectionContentMap, SiteSettings } from "./site-content.js";
 
 export interface ApiError {
   error: { code: string; message: string; fields?: Record<string, string>; details?: unknown };

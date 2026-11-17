@@ -1,4 +1,4 @@
-import { TIMEZONE, TZ_OFFSET } from "./constants";
+import { TIMEZONE, TZ_OFFSET } from "./constants.js";
 
 /** Funções puras de data. Todas as datas "de calendário" são strings YYYY-MM-DD no fuso America/Fortaleza. */
 

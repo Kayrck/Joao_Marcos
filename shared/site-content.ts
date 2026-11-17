@@ -6,7 +6,7 @@
  * Regra editorial: nenhum número, resultado, certificação ou promessa que o profissional
  * não tenha confirmado. Campos opcionais vazios simplesmente não aparecem no site público.
  */
-import type { SectionKey } from "./constants";
+import type { SectionKey } from "./constants.js";
 
 export interface IconItem {
   icon: string;
