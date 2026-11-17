@@ -25,3 +25,11 @@ export async function migrate(db: Db, log: (msg: string) => void = () => undefin
   }
   return ran;
 }
+
+export async function migrationsApplied(db: Db): Promise<number> {
+  try {
+    return (await db.query<{ n: number }>("select count(*)::int as n from schema_migrations")).rows[0].n;
+  } catch {
+    return 0;
+  }
+}

@@ -4,8 +4,15 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "dev": "concurrently -k -n web,api -c cyan,magenta \"npm:dev:web\" \"npm:dev:api\"",
+    "dev:web": "vite",
+    "dev:api": "tsx watch server/dev.ts",
+    "dev:docker": "concurrently -k -n web,api \"vite --host\" \"tsx watch server/dev.ts\"",
     "build": "vite build",
-    "dev": "vite"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "admin:create": "tsx scripts/create-admin.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.1169.0",

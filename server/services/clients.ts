@@ -4,7 +4,7 @@ import { camel, likeTerm } from "../db/index.js";
 import { audit } from "../lib/audit.js";
 import { today } from "../lib/clock.js";
 import { badRequest, conflict, notFound } from "../lib/errors.js";
-import { dateStr, emailField, parse, phoneField, positiveCents, cents, reqText, text } from "../lib/validate.js";
+import { dateStr, emailField, parse, phoneField, cents, reqText, text } from "../lib/validate.js";
 import { PAYMENT_METHODS, type ClientStatus } from "../../shared/constants.js";
 import { addDays, daysBetween, subscriptionEnd } from "../../shared/dates.js";
 import { normalizeWhatsapp } from "../../shared/phone.js";
@@ -24,7 +24,7 @@ import { getSettings } from "./site.js";
  * Status do cliente (calculado):
  *  arquivado > inativo (manual) > ativo (plano vigente hoje) > vencido (último plano terminou) > pendente (sem plano).
  */
-const CLIENT_BASE = `
+export const CLIENT_BASE = `
   select c.*,
          cur.plan_name as current_plan_name, cur.ends_on as current_ends_on,
          last.ends_on as last_ends_on,

@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 5173
 
 # Inicia o servidor do seu site e libera o acesso para a sua máquina (--host)
-CMD ["pnpm", "run", "dev", "--", "--host"]
+CMD ["pnpm", "run", "dev:docker"]

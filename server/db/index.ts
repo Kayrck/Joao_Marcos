@@ -99,6 +99,10 @@ async function createPgDb(url: string): Promise<Db> {
 // PGlite é o motor real do PostgreSQL compilado para WASM. Só é carregado fora de produção.
 export async function createPgliteDb(dir: string): Promise<Db> {
   const { PGlite } = await import("@electric-sql/pglite");
+  if (dir !== "memory") {
+    const { mkdir } = await import("node:fs/promises");
+    await mkdir(dir, { recursive: true }); // o PGlite não cria diretórios intermediários
+  }
   const opts = {
     parsers: {
       [OID_INT8]: (v: string) => Number(v),
@@ -115,7 +119,8 @@ export async function createPgliteDb(dir: string): Promise<Db> {
   }): Queryable => ({
     async query(sql, params) {
       const r = await c.query(sql, params as unknown[]);
-      return { rows: r.rows, rowCount: r.affectedRows ?? r.rows.length };
+      // PGlite reporta affectedRows = 0 em SELECT; só usamos esse campo quando não há linhas retornadas
+      return { rows: r.rows, rowCount: r.rows.length > 0 ? r.rows.length : (r.affectedRows ?? 0) };
     },
     async exec(sql) {
       await c.exec(sql);
